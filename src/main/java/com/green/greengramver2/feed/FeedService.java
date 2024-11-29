@@ -1,14 +1,17 @@
 package com.green.greengramver2.feed;
 
 import com.green.greengramver2.common.MyFileUtils;
+import com.green.greengramver2.feed.model.FeedPicDto;
 import com.green.greengramver2.feed.model.FeedPostReq;
 import com.green.greengramver2.feed.model.FeedPostRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -29,18 +32,39 @@ public class FeedService {
         String middlePath = String.format("feed/%d", feedId);
         myFileUtils.makeFolders(middlePath);
 
+        // 랜덤 파일명 저장용 >> feed_pics 테이블에 저장할 때 사용 //pics.size() 사용 >>
+        // 적절한 크기의 내부 배열이 만들지면 배열을 확장하고 복사하는 추가 작업이 필요 없게 됨.
+        List<String> picNameList = new ArrayList<>(pics.size());
+        for(String picName : picNameList) {
+
+        }
+
+
         for(MultipartFile pic : pics) {
             //각 파일 랜덤파일명 만들기
             String savedPicName = myFileUtils.makeRandomFileName(pic);
+            picNameList.add(savedPicName);
             String filePath = String.format("%s/%s", middlePath, savedPicName);
             try {
                 myFileUtils.transferTo(pic, filePath);
             } catch (IOException e) {
                 e.printStackTrace();
+
             }
         }
+        FeedPicDto feedPicDto = new FeedPicDto();
+        feedPicDto.setFeedId(feedId);
+        feedPicDto.setPics(picNameList);
+        int resultPics = feedPicsMapper.insFeedPics(feedPicDto);
 
-        return null;
+//        FeedPostRes res = new FeedPostRes();
+//        res.setFeedId(feedId);
+//        res.setPics(picNameList); >> FeedPostRes에서 @Setter 제거하고 @Builder 넣음
+
+        return FeedPostRes.builder()
+                .feedId(feedId)
+                .pics(picNameList)
+                .build();
     }
 
 }
