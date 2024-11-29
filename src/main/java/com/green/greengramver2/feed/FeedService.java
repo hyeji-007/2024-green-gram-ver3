@@ -1,13 +1,12 @@
 package com.green.greengramver2.feed;
 
 import com.green.greengramver2.common.MyFileUtils;
-import com.green.greengramver2.feed.model.FeedPicDto;
-import com.green.greengramver2.feed.model.FeedPostReq;
-import com.green.greengramver2.feed.model.FeedPostRes;
+import com.green.greengramver2.feed.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,6 +21,7 @@ public class FeedService {
     private final FeedPicsMapper feedPicsMapper;
     private final MyFileUtils myFileUtils;
 
+    @Transactional
     public FeedPostRes postFeed(List<MultipartFile> pics, FeedPostReq p) {
         int result = feedMapper.insFeed(p);
 
@@ -32,8 +32,8 @@ public class FeedService {
         String middlePath = String.format("feed/%d", feedId);
         myFileUtils.makeFolders(middlePath);
 
-        // 랜덤 파일명 저장용 >> feed_pics 테이블에 저장할 때 사용 //pics.size() 사용 >>
-        // 적절한 크기의 내부 배열이 만들지면 배열을 확장하고 복사하는 추가 작업이 필요 없게 됨.
+        // 랜덤 파일명 저장용 >> feed_pics 테이블에 저장할 때 사용
+        // pics.size() 사용 >> 적절한 크기의 내부 배열이 만들지면 배열을 확장하고 복사하는 추가 작업이 필요 없게 됨.
         List<String> picNameList = new ArrayList<>(pics.size());
         for(String picName : picNameList) {
 
@@ -65,6 +65,14 @@ public class FeedService {
                 .feedId(feedId)
                 .pics(picNameList)
                 .build();
+    }
+
+    public List<FeedGetRes> getFeedList(FeedGetReq p) {
+        List<FeedGetRes> list = feedMapper.selFeedList(p);
+        for(FeedGetRes item : list) {
+            item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
+        }
+        return list;
     }
 
 }
