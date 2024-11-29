@@ -20,14 +20,13 @@ public class UserService {
     private final MyFileUtils myFileUtils;
 
     public int postSignUp(MultipartFile pic, UserSignUpReq p) {
-
+        //프로필 이미지 파일 처리
         String savedPicName = (pic != null ? myFileUtils.makeRandomFileName(pic) : null);
 
         String hashedPassword = BCrypt.hashpw(p.getUpw(), BCrypt.gensalt());
         log.info("hashedPassword: {}", hashedPassword);
         p.setUpw(hashedPassword);
         p.setPic(savedPicName);
-        p.setUpw(hashedPassword);
 
         int result = mapper.insUser(p);
 
@@ -35,12 +34,14 @@ public class UserService {
             return result;
         }
 
-        long userId = p.getUserId();
+        // 저장 위치 만든다.
+        // middlePath = user/${userId}
+        // filePath = user/${userId}/${savedPicName}
+        long userId = p.getUserId(); //userId를 insert 후에 얻을 수 있다.
         String middlePath = String.format("user/%d", userId);
         myFileUtils.makeFolders(middlePath);
         log.info("middlePath: {}", middlePath);
         String filePath = String.format("%s/%s", middlePath, savedPicName);
-
         try {
             myFileUtils.transferTo(pic, filePath);
         } catch (IOException e) {
@@ -51,8 +52,7 @@ public class UserService {
 
     public UserSignInRes postSignIn(UserSignInReq p) {
         UserSignInRes res = mapper.selUserByUid(p.getUid());
-
-        if( res == null ) {
+        if( res == null ) { //아이디 없음
             res = new UserSignInRes();
             res.setMessage("아이디를 확인해 주세요.");
             return res;
@@ -64,7 +64,6 @@ public class UserService {
         res.setMessage("로그인 성공");
         return res;
     }
-
 }
 
 
