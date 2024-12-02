@@ -1,5 +1,6 @@
 package com.green.greengramver2.feed.comment;
 
+import com.green.greengramver2.feed.comment.model.FeedCommentDelReq;
 import com.green.greengramver2.feed.comment.model.FeedCommentPostReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,4 +18,10 @@ public class FeedCommentService {
         int result = mapper.insFeedComment(p);
         return p.getFeedCommentId();
     }
+
+    public long deleteFeedComment(FeedCommentDelReq p) {
+        int result = mapper.delFeedComment(p);
+        return p.getFeedCommentId();
+    }
+
 }

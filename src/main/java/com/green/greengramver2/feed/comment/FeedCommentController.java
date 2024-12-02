@@ -1,14 +1,13 @@
 package com.green.greengramver2.feed.comment;
 
 import com.green.greengramver2.common.model.ResultResponse;
+import com.green.greengramver2.feed.comment.model.FeedCommentDelReq;
 import com.green.greengramver2.feed.comment.model.FeedCommentPostReq;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -19,11 +18,24 @@ public class FeedCommentController {
 
     @PostMapping
     @Operation(summary = "댓글 등록")
-    public ResultResponse<Long> commentUp (@RequestBody FeedCommentPostReq p) {
+    public ResultResponse<Long> postFeedComment (@RequestBody FeedCommentPostReq p) {
         long result = service.postCommentUp(p);
         return ResultResponse.<Long>builder()
                 .resultMessage("댓글 등록 완료")
                 .resultData(result)
                 .build();
     }
+
+
+    @DeleteMapping
+    @Operation(summary = "댓글 삭제")
+    public ResultResponse<Long> deleteFeedComment (@ParameterObject @ModelAttribute FeedCommentDelReq p) {
+        long result = service.deleteFeedComment(p);
+        return ResultResponse.<Long>builder()
+                .resultMessage("댓글 삭제 완료")
+                .resultData(result)
+                .build();
+    }
+
+
 }

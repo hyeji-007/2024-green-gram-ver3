@@ -4,7 +4,6 @@ import com.green.greengramver2.feed.comment.model.FeedCommentGetRes;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
