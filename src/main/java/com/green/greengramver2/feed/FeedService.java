@@ -68,9 +68,11 @@ public class FeedService {
     }
 
     public List<FeedGetRes> getFeedList(FeedGetReq p) {
+        // N + 1 이슈 발생
         List<FeedGetRes> list = feedMapper.selFeedList(p);
         for(FeedGetRes item : list) {
             item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
+
         }
         return list;
     }
