@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class FeedCommentDelReq {
     private long feedCommentId;
+    private long signedUserId;
     private long feedId;
-    private long userId;
 }

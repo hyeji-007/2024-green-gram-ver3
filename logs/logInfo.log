@@ -7690,3 +7690,1138 @@ java.sql.SQLSyntaxErrorException: (conn=133) You have an error in your SQL synta
 1. DELETE FROM feed_comments
         WHERE feed_comment_id = 0
  {executed in 0 msec}
+[2024-12-02 18:34:49 INFO SpringApplicationShutdownHook] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated...
+[2024-12-02 18:34:49 INFO SpringApplicationShutdownHook] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed.
+[2024-12-02 18:34:51 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Starting GreenGramVer2Application using Java 17.0.12 with PID 8160 (D:\khj\GreenGramVer2\build\classes\java\main started by Administrator in D:\khj\GreenGramVer2)
+[2024-12-02 18:34:51 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] No active profile set, falling back to 1 default profile: "default"
+[2024-12-02 18:34:51 INFO restartedMain] [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2024-12-02 18:34:51 INFO restartedMain] [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2024-12-02 18:34:52 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port 8080 (http)
+[2024-12-02 18:34:52 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:34:52 INFO restartedMain] [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+[2024-12-02 18:34:52 INFO restartedMain] [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2024-12-02 18:34:52 INFO restartedMain] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+[2024-12-02 18:34:52 INFO restartedMain] [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 780 ms
+[2024-12-02 18:34:52 INFO restartedMain] [com.green.greengramver2.common.MyFileUtils] MyFileUtils - 생성자: D:\khj\2024-02\download\greengram_ver2
+[2024-12-02 18:34:52 INFO restartedMain] [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+[2024-12-02 18:34:52 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] LiveReload server is running on port 35729
+[2024-12-02 18:34:52 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:34:52 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port 8080 (http) with context path '/'
+[2024-12-02 18:34:52 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Started GreenGramVer2Application in 1.639 seconds (process running for 1.997)
+[2024-12-02 18:35:00 INFO http-nio-8080-exec-1] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2024-12-02 18:35:00 INFO http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] Initializing Servlet 'dispatcherServlet'
+[2024-12-02 18:35:00 INFO http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] Completed initialization in 0 ms
+[2024-12-02 18:35:00 INFO http-nio-8080-exec-6] [com.green.greengramver2.feed.FeedController] FeedController > getFeedList > p: FeedGetReq(super=Paging(page=1, size=20, startIdx=0), signedUserId=4)
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [com.zaxxer.hikari.pool.HikariPool] HikariPool-1 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@7e286a65
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_id AS feedId, A.contents, A.location
+        , A.created_at AS createdAt
+        , B.user_id AS writerUserId
+        , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+        , B.pic AS writerPic
+        , IF(C.feed_id IS NULL, 0, 1) AS isLike
+        FROM feed A
+        INNER JOIN user B
+        ON A.writer_user_id = B.user_id
+        LEFT JOIN feed_like C
+        ON A.feed_id = C.feed_id
+        AND C.user_id = 4
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 20
+ {executed in 1 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+|feed_id |contents |location |created_at          |user_id |writernm |pic                                      |islike |
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+|39      | 하하하     |green7   |2024-12-02 16:21:10 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |0      |
+|38      |asd      |asd      |2024-11-29 17:46:29 |5       |asd      |2b341828-7cc5-4ebf-b0c0-7d37718494fa.jpg |0      |
+|37      |ㅁㅁ       |ㅁㅁ       |2024-11-29 16:21:12 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|36      |귀여운 고    |green2   |2024-11-29 15:54:57 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|35      |null     |null     |2024-11-29 14:35:27 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|34      |null     |null     |2024-11-29 14:32:36 |1       |홍길동      |null                                     |0      |
+|4       |null     |green2   |2024-11-29 10:44:15 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|3       |null     |green2   |2024-11-29 10:42:28 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|1       |1212     |홍길동      |2024-11-28 17:35:56 |1       |홍길동      |null                                     |0      |
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 39
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|b81bf7fa-4326-4b3e-8b27-3878901178c4.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 39
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|10              |귀여운 팬더  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 38
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|9e9ddb1e-3005-41e8-8762-d8ec211724af.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 38
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|---------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment  |user_id |writernm |pic                                      |
+|----------------|---------|--------|---------|-----------------------------------------|
+|1               |하히이      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|3               |우준이 바보   |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|4               |우준이 짱바보  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|11              |우준이 짱짱바보 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|---------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 37
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|11035c28-bf32-4e28-b2c8-31d10f4cc658.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 37
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|---------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment  |user_id |writernm |pic                                      |
+|----------------|---------|--------|---------|-----------------------------------------|
+|2               |귀여운 고양쓰  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|5               |고양이는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|12              |고양이      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|16              |하하하      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|---------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 36
+ {executed in 1 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|d63d577d-45e7-49a3-b26b-b66286d0536d.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 36
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|6               |팬더는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|13              |팬더      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 35
+ {executed in 1 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|2e072291-3ee5-41cd-b859-ee1b0b586911.jpg |
+|5b2cfdcb-01ca-417c-8c5d-fd3f274d8be5.jpg |
+|a3ac7fab-99e5-4bf7-a08c-90936ece50fa.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 35
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|----------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment   |user_id |writernm |pic                                      |
+|----------------|----------|--------|---------|-----------------------------------------|
+|7               |고양이는 짱귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|14              |고양이는 귀여움  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|----------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 34
+ {executed in 1 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|660a50bf-d611-4a15-ae51-e36055b76547.jpg |
+|744f7326-cf08-4ed2-bbe3-575621c2958f.jpg |
+|9486ae08-ca98-4a66-b1cd-c7d873308217.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 34
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|8               |포항항     |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|15              |포항항항    |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|225c1bed-106d-4d7a-a6c1-ac928b624817.jpg |
+|714aff02-7ff3-44e2-a8bf-fad8c2e72539.jpg |
+|84ae25a6-fef9-43c3-b749-7e65b36034a5.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 4
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|9               |팬더는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 3
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----|
+|pic |
+|----|
+|----|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 3
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|----|
+|feed_comment_id |comment |user_id |writernm |pic |
+|----------------|--------|--------|---------|----|
+|----------------|--------|--------|---------|----|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 1
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|--------|
+|pic     |
+|--------|
+|사진1.jpg |
+|사진2.jpg |
+|사진3.jpg |
+|--------|
+
+[2024-12-02 18:35:01 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 1
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:35:01 INFO http-nio-8080-exec-6] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|----|
+|feed_comment_id |comment |user_id |writernm |pic |
+|----------------|--------|--------|---------|----|
+|----------------|--------|--------|---------|----|
+
+[2024-12-02 18:35:04 INFO http-nio-8080-exec-2] [com.green.greengramver2.feed.comment.FeedCommentController] delFeedComment com.green.greengramver2.feed.comment.model.FeedCommentDelReq@33007ce1
+[2024-12-02 18:35:04 WARN http-nio-8080-exec-2] [org.mariadb.jdbc.message.server.ErrorPacket] Error: 1064-42000: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+[2024-12-02 18:35:04 ERRORhttp-nio-8080-exec-2] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. DELETE FROM feed_comments
+        WHERE feed_comment_id = 10
+        AND user_id = 0 AS signedUserId
+ {FAILED after 1 msec}
+java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:289)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:172)
+	at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:915)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:854)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResponse(StandardClient.java:773)
+	at org.mariadb.jdbc.client.impl.StandardClient.execute(StandardClient.java:697)
+	at org.mariadb.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:93)
+	at org.mariadb.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:276)
+	at net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy.execute(PreparedStatementSpy.java:443)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.delete(DefaultSqlSession.java:212)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy82.delete(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.delete(SqlSessionTemplate.java:304)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:72)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy83.delFeedComment(Unknown Source)
+	at com.green.greengramver2.feed.comment.FeedCommentService.deleteFeedComment(FeedCommentService.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.green.greengramver2.feed.comment.FeedCommentService$$SpringCGLIB$$0.deleteFeedComment(<generated>)
+	at com.green.greengramver2.feed.comment.FeedCommentController.deleteFeedComment(FeedCommentController.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[2024-12-02 18:35:04 ERRORhttp-nio-8080-exec-2] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+### The error may exist in file [D:\khj\GreenGramVer2\build\resources\main\mappers\FeedCommentMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: DELETE FROM feed_comments         WHERE feed_comment_id = ?         AND user_id = ? AS signedUserId
+### Cause: java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+; bad SQL grammar []] with root cause
+java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:289)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:172)
+	at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:915)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:854)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResponse(StandardClient.java:773)
+	at org.mariadb.jdbc.client.impl.StandardClient.execute(StandardClient.java:697)
+	at org.mariadb.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:93)
+	at org.mariadb.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:276)
+	at net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy.execute(PreparedStatementSpy.java:443)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.delete(DefaultSqlSession.java:212)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy82.delete(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.delete(SqlSessionTemplate.java:304)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:72)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy83.delFeedComment(Unknown Source)
+	at com.green.greengramver2.feed.comment.FeedCommentService.deleteFeedComment(FeedCommentService.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.green.greengramver2.feed.comment.FeedCommentService$$SpringCGLIB$$0.deleteFeedComment(<generated>)
+	at com.green.greengramver2.feed.comment.FeedCommentController.deleteFeedComment(FeedCommentController.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[2024-12-02 18:35:07 INFO http-nio-8080-exec-8] [com.green.greengramver2.feed.comment.FeedCommentController] delFeedComment com.green.greengramver2.feed.comment.model.FeedCommentDelReq@5b1196ed
+[2024-12-02 18:35:07 WARN http-nio-8080-exec-8] [org.mariadb.jdbc.message.server.ErrorPacket] Error: 1064-42000: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+[2024-12-02 18:35:07 ERRORhttp-nio-8080-exec-8] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. DELETE FROM feed_comments
+        WHERE feed_comment_id = 1
+        AND user_id = 0 AS signedUserId
+ {FAILED after 0 msec}
+java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:289)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:172)
+	at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:915)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:854)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResponse(StandardClient.java:773)
+	at org.mariadb.jdbc.client.impl.StandardClient.execute(StandardClient.java:697)
+	at org.mariadb.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:93)
+	at org.mariadb.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:276)
+	at net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy.execute(PreparedStatementSpy.java:443)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.delete(DefaultSqlSession.java:212)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy82.delete(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.delete(SqlSessionTemplate.java:304)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:72)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy83.delFeedComment(Unknown Source)
+	at com.green.greengramver2.feed.comment.FeedCommentService.deleteFeedComment(FeedCommentService.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.green.greengramver2.feed.comment.FeedCommentService$$SpringCGLIB$$0.deleteFeedComment(<generated>)
+	at com.green.greengramver2.feed.comment.FeedCommentController.deleteFeedComment(FeedCommentController.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[2024-12-02 18:35:07 ERRORhttp-nio-8080-exec-8] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet]] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+### The error may exist in file [D:\khj\GreenGramVer2\build\resources\main\mappers\FeedCommentMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: DELETE FROM feed_comments         WHERE feed_comment_id = ?         AND user_id = ? AS signedUserId
+### Cause: java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+; bad SQL grammar []] with root cause
+java.sql.SQLSyntaxErrorException: (conn=163) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS signedUserId' at line 3
+	at org.mariadb.jdbc.export.ExceptionFactory.createException(ExceptionFactory.java:289)
+	at org.mariadb.jdbc.export.ExceptionFactory.create(ExceptionFactory.java:378)
+	at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:172)
+	at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:915)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:854)
+	at org.mariadb.jdbc.client.impl.StandardClient.readResponse(StandardClient.java:773)
+	at org.mariadb.jdbc.client.impl.StandardClient.execute(StandardClient.java:697)
+	at org.mariadb.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:93)
+	at org.mariadb.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:276)
+	at net.sf.log4jdbc.sql.jdbcapi.PreparedStatementSpy.execute(PreparedStatementSpy.java:443)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.delete(DefaultSqlSession.java:212)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	at jdk.proxy2/jdk.proxy2.$Proxy82.delete(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.delete(SqlSessionTemplate.java:304)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:72)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy3/jdk.proxy3.$Proxy83.delFeedComment(Unknown Source)
+	at com.green.greengramver2.feed.comment.FeedCommentService.deleteFeedComment(FeedCommentService.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at com.green.greengramver2.feed.comment.FeedCommentService$$SpringCGLIB$$0.deleteFeedComment(<generated>)
+	at com.green.greengramver2.feed.comment.FeedCommentController.deleteFeedComment(FeedCommentController.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:936)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[2024-12-02 18:36:57 INFO File Watcher] [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener] Restarting due to 26 class path changes (0 additions, 0 deletions, 26 modifications)
+[2024-12-02 18:36:57 INFO Thread-5] [org.apache.coyote.http11.Http11NioProtocol] Stopping ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:36:58 INFO Thread-5] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated...
+[2024-12-02 18:36:58 INFO Thread-5] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed.
+[2024-12-02 18:36:58 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Starting GreenGramVer2Application using Java 17.0.12 with PID 8160 (D:\khj\GreenGramVer2\build\classes\java\main started by Administrator in D:\khj\GreenGramVer2)
+[2024-12-02 18:36:58 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] No active profile set, falling back to 1 default profile: "default"
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port 8080 (http)
+[2024-12-02 18:36:58 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:36:58 INFO restartedMain] [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+[2024-12-02 18:36:58 INFO restartedMain] [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2024-12-02 18:36:58 INFO restartedMain] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 195 ms
+[2024-12-02 18:36:58 INFO restartedMain] [com.green.greengramver2.common.MyFileUtils] MyFileUtils - 생성자: D:\khj\2024-02\download\greengram_ver2
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] LiveReload server is running on port 35729
+[2024-12-02 18:36:58 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port 8080 (http) with context path '/'
+[2024-12-02 18:36:58 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Started GreenGramVer2Application in 0.363 seconds (process running for 127.53)
+[2024-12-02 18:36:58 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener] Condition evaluation unchanged
+[2024-12-02 18:37:23 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Starting GreenGramVer2Application using Java 17.0.12 with PID 1772 (D:\khj\GreenGramVer2\build\classes\java\main started by Administrator in D:\khj\GreenGramVer2)
+[2024-12-02 18:37:23 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] No active profile set, falling back to 1 default profile: "default"
+[2024-12-02 18:37:23 INFO restartedMain] [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2024-12-02 18:37:23 INFO restartedMain] [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2024-12-02 18:37:23 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port 8080 (http)
+[2024-12-02 18:37:23 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:37:23 INFO restartedMain] [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+[2024-12-02 18:37:23 INFO restartedMain] [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2024-12-02 18:37:23 INFO restartedMain] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+[2024-12-02 18:37:23 INFO restartedMain] [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 766 ms
+[2024-12-02 18:37:23 INFO restartedMain] [com.green.greengramver2.common.MyFileUtils] MyFileUtils - 생성자: D:\khj\2024-02\download\greengram_ver2
+[2024-12-02 18:37:24 INFO restartedMain] [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+[2024-12-02 18:37:24 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] LiveReload server is running on port 35729
+[2024-12-02 18:37:24 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8080"]
+[2024-12-02 18:37:24 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port 8080 (http) with context path '/'
+[2024-12-02 18:37:24 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Started GreenGramVer2Application in 1.624 seconds (process running for 1.976)
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-1] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] Initializing Servlet 'dispatcherServlet'
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-1] [org.springframework.web.servlet.DispatcherServlet] Completed initialization in 1 ms
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [com.green.greengramver2.feed.FeedController] FeedController > getFeedList > p: FeedGetReq(super=Paging(page=1, size=20, startIdx=0), signedUserId=4)
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [com.zaxxer.hikari.pool.HikariPool] HikariPool-1 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@38b2fd51
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_id AS feedId, A.contents, A.location
+        , A.created_at AS createdAt
+        , B.user_id AS writerUserId
+        , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+        , B.pic AS writerPic
+        , IF(C.feed_id IS NULL, 0, 1) AS isLike
+        FROM feed A
+        INNER JOIN user B
+        ON A.writer_user_id = B.user_id
+        LEFT JOIN feed_like C
+        ON A.feed_id = C.feed_id
+        AND C.user_id = 4
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 20
+ {executed in 1 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+|feed_id |contents |location |created_at          |user_id |writernm |pic                                      |islike |
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+|39      | 하하하     |green7   |2024-12-02 16:21:10 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |0      |
+|38      |asd      |asd      |2024-11-29 17:46:29 |5       |asd      |2b341828-7cc5-4ebf-b0c0-7d37718494fa.jpg |0      |
+|37      |ㅁㅁ       |ㅁㅁ       |2024-11-29 16:21:12 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|36      |귀여운 고    |green2   |2024-11-29 15:54:57 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|35      |null     |null     |2024-11-29 14:35:27 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|34      |null     |null     |2024-11-29 14:32:36 |1       |홍길동      |null                                     |0      |
+|4       |null     |green2   |2024-11-29 10:44:15 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|3       |null     |green2   |2024-11-29 10:42:28 |2       |bbong2   |4b9404e6-d275-4522-bf16-c3f6ac1ff9b1.jpg |0      |
+|1       |1212     |홍길동      |2024-11-28 17:35:56 |1       |홍길동      |null                                     |0      |
+|--------|---------|---------|--------------------|--------|---------|-----------------------------------------|-------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 39
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|b81bf7fa-4326-4b3e-8b27-3878901178c4.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 39
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|10              |귀여운 팬더  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 38
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|9e9ddb1e-3005-41e8-8762-d8ec211724af.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 38
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|---------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment  |user_id |writernm |pic                                      |
+|----------------|---------|--------|---------|-----------------------------------------|
+|1               |하히이      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|3               |우준이 바보   |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|4               |우준이 짱바보  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|11              |우준이 짱짱바보 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|---------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 37
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|11035c28-bf32-4e28-b2c8-31d10f4cc658.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 37
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|---------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment  |user_id |writernm |pic                                      |
+|----------------|---------|--------|---------|-----------------------------------------|
+|2               |귀여운 고양쓰  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|5               |고양이는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|12              |고양이      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|16              |하하하      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|---------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 36
+ {executed in 1 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|d63d577d-45e7-49a3-b26b-b66286d0536d.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 36
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|6               |팬더는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|13              |팬더      |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 35
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|2e072291-3ee5-41cd-b859-ee1b0b586911.jpg |
+|5b2cfdcb-01ca-417c-8c5d-fd3f274d8be5.jpg |
+|a3ac7fab-99e5-4bf7-a08c-90936ece50fa.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 35
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|----------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment   |user_id |writernm |pic                                      |
+|----------------|----------|--------|---------|-----------------------------------------|
+|7               |고양이는 짱귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|14              |고양이는 귀여움  |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|----------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 34
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|660a50bf-d611-4a15-ae51-e36055b76547.jpg |
+|744f7326-cf08-4ed2-bbe3-575621c2958f.jpg |
+|9486ae08-ca98-4a66-b1cd-c7d873308217.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 34
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 1 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|8               |포항항     |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|15              |포항항항    |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|-----------------------------------------|
+|pic                                      |
+|-----------------------------------------|
+|225c1bed-106d-4d7a-a6c1-ac928b624817.jpg |
+|714aff02-7ff3-44e2-a8bf-fad8c2e72539.jpg |
+|84ae25a6-fef9-43c3-b749-7e65b36034a5.jpg |
+|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 4
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|-----------------------------------------|
+|feed_comment_id |comment |user_id |writernm |pic                                      |
+|----------------|--------|--------|---------|-----------------------------------------|
+|9               |팬더는 귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
+|----------------|--------|--------|---------|-----------------------------------------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 3
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----|
+|pic |
+|----|
+|----|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 3
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|----|
+|feed_comment_id |comment |user_id |writernm |pic |
+|----------------|--------|--------|---------|----|
+|----------------|--------|--------|---------|----|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT pic
+        FROM feed_pics
+        WHERE feed_id = 1
+ {executed in 0 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|--------|
+|pic     |
+|--------|
+|사진1.jpg |
+|사진2.jpg |
+|사진3.jpg |
+|--------|
+
+[2024-12-02 18:37:28 DEBUGhttp-nio-8080-exec-9] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. SELECT A.feed_comment_id AS feedCommentId
+             , A.comment
+             , B.user_id AS writerUserId
+             , IF(B.nick_name IS NULL, B.uid, B.nick_name) AS writerNm
+             , B.pic AS writerPic
+        FROM feed_comments A
+        INNER JOIN user B
+        ON A.user_id = B.user_id
+        WHERE A.feed_id = 1
+        ORDER BY A.feed_id DESC
+        LIMIT 0, 4
+ {executed in 1 msec}
+[2024-12-02 18:37:28 INFO http-nio-8080-exec-9] [jdbc.resultsettable] 
+|----------------|--------|--------|---------|----|
+|feed_comment_id |comment |user_id |writernm |pic |
+|----------------|--------|--------|---------|----|
+|----------------|--------|--------|---------|----|
+
+[2024-12-02 18:37:31 INFO http-nio-8080-exec-2] [com.green.greengramver2.feed.comment.FeedCommentController] delFeedComment com.green.greengramver2.feed.comment.model.FeedCommentDelReq@36921bc2
+[2024-12-02 18:37:31 DEBUGhttp-nio-8080-exec-2] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. DELETE FROM feed_comments
+        WHERE feed_comment_id = 10
+        AND user_id = 4
+ {executed in 1 msec}
+[2024-12-02 18:37:57 INFO http-nio-8080-exec-6] [com.green.greengramver2.feed.comment.FeedCommentController] delFeedComment com.green.greengramver2.feed.comment.model.FeedCommentDelReq@6da2c81
+[2024-12-02 18:37:57 DEBUGhttp-nio-8080-exec-6] [jdbc.sqltiming]  com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+1. DELETE FROM feed_comments
+        WHERE feed_comment_id = 1
+        AND user_id = 4
+ {executed in 6 msec}
