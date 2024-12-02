@@ -90,9 +90,10 @@ public class FeedService {
             commentGetRes.setCommentList(commentList);
             commentGetRes.setMoreComment(commentList.size() == 4); //4개면 true, 4개 아니면 false
 
+            // 댓글이 4개가 되면 거기부터 "더보기" 문구란이 뜸
             if(commentGetRes.isMoreComment()) {
                 commentList.remove(commentList.size() - 1);
-            }
+            } // 누르면 "더보기" 문구가 사라지고 그 인덱스에 있던 원댓글부터 지정한 크기만큼의 댓글이 뜬다.(사이즈 = 댓글 + isMore(+1))
             item.setComment(commentGetRes);
         }
         return list;
