@@ -14378,3 +14378,39 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 |7               |고양이는 짱귀엽다 |4       |bbong4   |96f8e19b-7448-42d6-b95d-18a06af6d37a.jpg |
 |----------------|----------|--------|---------|-----------------------------------------|
 
+[2024-12-03 16:56:29 INFO File Watcher] [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener] Restarting due to 6 class path changes (0 additions, 0 deletions, 6 modifications)
+[2024-12-03 16:56:29 INFO Thread-5] [org.apache.coyote.http11.Http11NioProtocol] Stopping ProtocolHandler ["http-nio-8080"]
+[2024-12-03 16:56:29 INFO Thread-5] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown initiated...
+[2024-12-03 16:56:29 INFO Thread-5] [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Shutdown completed.
+[2024-12-03 16:56:29 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Starting GreenGramVer2Application using Java 17.0.12 with PID 10896 (D:\khj\GreenGramVer2\build\classes\java\main started by Administrator in D:\khj\GreenGramVer2)
+[2024-12-03 16:56:29 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] No active profile set, falling back to 1 default profile: "default"
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port 8080 (http)
+[2024-12-03 16:56:29 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8080"]
+[2024-12-03 16:56:29 INFO restartedMain] [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+[2024-12-03 16:56:29 INFO restartedMain] [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2024-12-03 16:56:29 INFO restartedMain] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 204 ms
+[2024-12-03 16:56:29 INFO restartedMain] [com.green.greengramver2.common.MyFileUtils] MyFileUtils - 생성자: D:\khj\2024-02\download\greengram_ver2
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] LiveReload server is running on port 35729
+[2024-12-03 16:56:29 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8080"]
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port 8080 (http) with context path '/'
+[2024-12-03 16:56:29 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Started GreenGramVer2Application in 0.376 seconds (process running for 3084.727)
+[2024-12-03 16:56:29 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener] Condition evaluation unchanged
+[2024-12-03 17:03:52 INFO File Watcher] [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener] Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+[2024-12-03 17:03:52 INFO Thread-7] [org.apache.coyote.http11.Http11NioProtocol] Stopping ProtocolHandler ["http-nio-8080"]
+[2024-12-03 17:03:52 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Starting GreenGramVer2Application using Java 17.0.12 with PID 10896 (D:\khj\GreenGramVer2\build\classes\java\main started by Administrator in D:\khj\GreenGramVer2)
+[2024-12-03 17:03:52 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] No active profile set, falling back to 1 default profile: "default"
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port 8080 (http)
+[2024-12-03 17:03:52 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8080"]
+[2024-12-03 17:03:52 INFO restartedMain] [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+[2024-12-03 17:03:52 INFO restartedMain] [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[2024-12-03 17:03:52 INFO restartedMain] [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 193 ms
+[2024-12-03 17:03:52 INFO restartedMain] [com.green.greengramver2.common.MyFileUtils] MyFileUtils - 생성자: D:\khj\2024-02\download\greengram_ver2
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer] LiveReload server is running on port 35729
+[2024-12-03 17:03:52 INFO restartedMain] [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8080"]
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port 8080 (http) with context path '/'
+[2024-12-03 17:03:52 INFO restartedMain] [com.green.greengramver2.GreenGramVer2Application] Started GreenGramVer2Application in 0.349 seconds (process running for 3527.666)
+[2024-12-03 17:03:52 INFO restartedMain] [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener] Condition evaluation unchanged
