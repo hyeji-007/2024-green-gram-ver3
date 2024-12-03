@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface FeedCommentMapper {
-    int insFeedComment(FeedCommentPostReq p);
+    void insFeedComment(FeedCommentPostReq p);
     List<FeedCommentDto> selFeedCommentList(FeedCommentGetReq p);
     int delFeedComment(FeedCommentDelReq p);
 }

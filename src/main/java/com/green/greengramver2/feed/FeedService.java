@@ -8,7 +8,6 @@ import com.green.greengramver2.feed.comment.model.FeedCommentGetRes;
 import com.green.greengramver2.feed.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,14 +36,8 @@ public class FeedService {
         String middlePath = String.format("feed/%d", feedId);
         myFileUtils.makeFolders(middlePath);
 
-        // 랜덤 파일명 저장용 >> feed_pics 테이블에 저장할 때 사용
-        // pics.size() 사용 >> 적절한 크기의 내부 배열이 만들지면 배열을 확장하고 복사하는 추가 작업이 필요 없게 됨.
+        //랜덤 파일명 저장용  >> feed_pics 테이블에 저장할 때 사용
         List<String> picNameList = new ArrayList<>(pics.size());
-        for(String picName : picNameList) {
-
-        }
-
-
         for(MultipartFile pic : pics) {
             //각 파일 랜덤파일명 만들기
             String savedPicName = myFileUtils.makeRandomFileName(pic);
@@ -54,17 +47,12 @@ public class FeedService {
                 myFileUtils.transferTo(pic, filePath);
             } catch (IOException e) {
                 e.printStackTrace();
-
             }
         }
         FeedPicDto feedPicDto = new FeedPicDto();
         feedPicDto.setFeedId(feedId);
         feedPicDto.setPics(picNameList);
         int resultPics = feedPicsMapper.insFeedPics(feedPicDto);
-
-//        FeedPostRes res = new FeedPostRes();
-//        res.setFeedId(feedId);
-//        res.setPics(picNameList); >> FeedPostRes에서 @Setter 제거하고 @Builder 넣음
 
         return FeedPostRes.builder()
                 .feedId(feedId)
@@ -76,20 +64,19 @@ public class FeedService {
         // N + 1 이슈 발생
         List<FeedGetRes> list = feedMapper.selFeedList(p);
         for(FeedGetRes item : list) {
-            // 피드 당 사진 리스트
+            //피드 당 사진 리스트
             item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
 
-            // 피드 당 댓글 4개
-            FeedCommentGetReq commentGetReq = new FeedCommentGetReq(item.getFeedId(), 1);
-
-            List<FeedCommentDto> commentList = feedCommentMapper.selFeedCommentList(commentGetReq); //(0, 4), 댓글이 100개가 달려있어도 4개만 넘어온다.
+            //피드 당 댓글 4개
+            FeedCommentGetReq commentGetReq = new FeedCommentGetReq(item.getFeedId(), 0, 3);
+            List<FeedCommentDto> commentList = feedCommentMapper.selFeedCommentList(commentGetReq); //0, 4
 
             FeedCommentGetRes commentGetRes = new FeedCommentGetRes();
             commentGetRes.setCommentList(commentList);
-            commentGetRes.setMoreComment(commentList.size() == commentGetReq.getSize()); //4개면 true, 4개 아니면 false
+            commentGetRes.setMoreComment( commentList.size() == commentGetReq.getSize() ); //4개면 true, 4개 아니면 false
 
             if(commentGetRes.isMoreComment()) {
-                commentList.remove(commentList.size() - 1); //4개면 true, 제일 마지막 댓글을 뺀다.
+                commentList.remove(commentList.size() - 1);
             }
             item.setComment(commentGetRes);
         }

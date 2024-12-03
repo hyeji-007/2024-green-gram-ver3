@@ -1,16 +1,12 @@
 package com.green.greengramver2.feed.comment;
 
 import com.green.greengramver2.common.model.ResultResponse;
-import com.green.greengramver2.feed.comment.model.FeedCommentDelReq;
-import com.green.greengramver2.feed.comment.model.FeedCommentGetReq;
-import com.green.greengramver2.feed.comment.model.FeedCommentGetRes;
-import com.green.greengramver2.feed.comment.model.FeedCommentPostReq;
+import com.green.greengramver2.feed.comment.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.logging.impl.NoOpLog;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,18 +20,18 @@ public class FeedCommentController {
 
     @PostMapping
     @Operation(summary = "피드 댓글 등록", description = "")
-    public ResultResponse<Long> postFeedComment (@RequestBody FeedCommentPostReq p) {
-        long result = service.postCommentUp(p);
+    public ResultResponse<Long> postFeedComment(@RequestBody FeedCommentPostReq p) {
+        log.info("FeedCommentController > postFeedComment > p: {}", p);
+        long feedCommentId = service.postFeedComment(p);
         return ResultResponse.<Long>builder()
                 .resultMessage("댓글 등록 완료")
-                .resultData(result)
+                .resultData(feedCommentId)
                 .build();
     }
 
-    // 쿼리스트링
     @GetMapping
-    @Operation(summary = "피드 댓글 리스트", description = "댓글 더보기 처리")
-    public ResultResponse<FeedCommentGetRes> getFeedCommentList(@ParameterObject @ModelAttribute FeedCommentGetReq p) {
+    @Operation(summary = "피드 댓글 리스트", description = "댓글 더보기 처리 - 파라미터를 ModelAttribute를 이용해서 받음")
+    public ResultResponse<FeedCommentGetRes> getFeedComment(@ParameterObject @ModelAttribute FeedCommentGetReq p) {
         log.info("FeedCommentController > getFeedComment > p: {}", p);
         FeedCommentGetRes res = service.getFeedComment(p);
         return ResultResponse.<FeedCommentGetRes>builder()
@@ -44,12 +40,12 @@ public class FeedCommentController {
                 .build();
     }
 
-    @GetMapping("/ver2")
-    @Operation(summary = "피드 댓글 리스트", description = "댓글 더보기 처리")
+    @GetMapping("/request_param")
+    @Operation(summary = "피드 댓글 리스트", description = "댓글 더보기 처리 - 파라미터를 RequestParam을 이용해서 받음")
     public ResultResponse<FeedCommentGetRes> getFeedComment2(@Parameter(description = "피드 PK", example = "12") @RequestParam("feed_id") long feedId
-            , @Parameter(description = "페이지", example = "2") @RequestParam int page
-    ) {
-        FeedCommentGetReq p = new FeedCommentGetReq(feedId, page);
+            , @Parameter(description = "튜플 시작 index", example = "3") @RequestParam("start_idx") int startIdx
+            , @Parameter(description = "페이지 당 아이템 수", example = "20") @RequestParam(required = false, defaultValue = "20") int size) {
+        FeedCommentGetReq p = new FeedCommentGetReq(feedId, startIdx, size);
         log.info("FeedCommentController > getFeedComment > p: {}", p);
         FeedCommentGetRes res = service.getFeedComment(p);
         return ResultResponse.<FeedCommentGetRes>builder()
@@ -58,21 +54,19 @@ public class FeedCommentController {
                 .build();
     }
 
-
-    // 삭제 시 받아야 할 데이터 feedCommentId + 로그인한 사용자의 PK (feed_comment_id, signed_user_id)
-    // FE - data 전달방식 : Query-String
+    //삭제시 받아야 할 데이터 feedCommentId + 로그인한 사용자의 PK  (feed_comment_id, signed_user_id)
+    //FE - data 전달방식 : Query-String
     @DeleteMapping
-    @Operation(summary = "댓글 삭제1")
-    public ResultResponse<Long> deleteFeedComment (@ParameterObject @ModelAttribute FeedCommentDelReq p) {
-        log.info("FeedCommentController > delFeedComment > p: {}" , p);
-        long result = service.deleteFeedComment(p);
-        return ResultResponse.<Long>builder()
-                .resultMessage("댓글 삭제 완료")
-                .resultData(result)
+    public ResultResponse<Integer> delFeedComment(@ParameterObject @ModelAttribute FeedCommentDelReq p) {
+        log.info("FeedCommentController > delFeedComment > p: {}", p);
+        int res = service.delFeedComment(p);
+        return ResultResponse.<Integer>builder()
+                .resultMessage("댓글 삭제가 완료되었습니다.")
+                .resultData(res)
                 .build();
     }
 
-
+}
 
     /*
     @DeleteMapping
@@ -92,4 +86,4 @@ public class FeedCommentController {
      */
 
 
-}
+
