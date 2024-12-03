@@ -80,18 +80,16 @@ public class FeedService {
             item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
 
             // 피드 당 댓글 4개
-            FeedCommentGetReq commentGetReq = new FeedCommentGetReq();
-            commentGetReq.setPage(1);
-            commentGetReq.setFeedId(item.getFeedId());
+            FeedCommentGetReq commentGetReq = new FeedCommentGetReq(item.getFeedId(), 1);
 
-            List<FeedCommentDto> commentList = feedCommentMapper.selFeedCommentList(commentGetReq);
+            List<FeedCommentDto> commentList = feedCommentMapper.selFeedCommentList(commentGetReq); //(0, 4), 댓글이 100개가 달려있어도 4개만 넘어온다.
 
             FeedCommentGetRes commentGetRes = new FeedCommentGetRes();
             commentGetRes.setCommentList(commentList);
-            commentGetRes.setMoreComment(commentList.size() == 4); //4개면 true, 4개 아니면 false
+            commentGetRes.setMoreComment(commentList.size() == commentGetReq.getSize()); //4개면 true, 4개 아니면 false
 
             if(commentGetRes.isMoreComment()) {
-                commentList.remove(commentList.size() - 1);
+                commentList.remove(commentList.size() - 1); //4개면 true, 제일 마지막 댓글을 뺀다.
             }
             item.setComment(commentGetRes);
         }

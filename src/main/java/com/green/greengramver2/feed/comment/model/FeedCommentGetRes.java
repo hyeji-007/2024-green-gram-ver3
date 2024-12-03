@@ -12,5 +12,6 @@ import java.util.List;
 @Setter
 public class FeedCommentGetRes  {
     private boolean moreComment;
-    private List<FeedCommentDto> commentList;
+    private List<FeedCommentDto> commentList; //댓글 3개 담김, 담기는 댓글으 3개 이하, 4개 > 하나 제거
+    //List<FeedGetRes> getFeedList
 }

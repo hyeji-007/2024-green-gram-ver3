@@ -19,6 +19,7 @@ public class FeedGetRes {
     private int isLike;
 
     private List<String> pics;
-    private FeedCommentGetRes comment;
+    private FeedCommentGetRes comment; //피드 당 응답할 때 사용하는 객체 >> 댓글 정보를 담음
+    // comment에는 FeedCommentGetRes 객체의 주소값만 담아야 함.
 }
 
