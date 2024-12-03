@@ -18,7 +18,7 @@ public class FeedCommentGetReq {
     @Schema(title="피드 PK", description = "피드 PK", name="feed_id", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     private long feedId;
 
-    @Schema(title="튜플 시작 index", description = "댓글 Element 갯수를 보내주면 된다.", name="start_idx", example = "3", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(title="튜플 시작 index", description = "댓글 Element 개수를 보내주면 된다.", name="start_idx", example = "3", requiredMode = Schema.RequiredMode.REQUIRED)
     private int startIdx;
 
     @Schema(title="페이지 당 아이템 수", description = "default: 20", example = "20")
