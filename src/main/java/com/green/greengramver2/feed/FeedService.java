@@ -62,7 +62,11 @@ public class FeedService {
 
     public List<FeedGetRes> getFeedList(FeedGetReq p) {
         // N + 1 이슈 발생
-        List<FeedGetRes> list = feedMapper.selFeedList(p);
+        List<FeedGetRes> list = feedMapper.selFeedList(p); //0~20
+        /*
+        for (int i = 0; i < list.size(); i++) {
+        }
+         */
         for(FeedGetRes item : list) {
             //피드 당 사진 리스트
             item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
@@ -76,7 +80,7 @@ public class FeedService {
             commentGetRes.setMoreComment( commentList.size() == commentGetReq.getSize() ); //4개면 true, 4개 아니면 false
 
             if(commentGetRes.isMoreComment()) {
-                commentList.remove(commentList.size() - 1);
+                commentList.remove(commentList.size() - 1); // 4 - 1 = 3 , commentList.size()가 0일 경우에 에러 터짐
             }
             item.setComment(commentGetRes);
         }
