@@ -29,8 +29,9 @@ public class MyFileUtils {
     // path = "ddd/aaa"
     // D:\khj\2024-02\download\greengram_ver1/ddd/aaa >> uploadPath에 저장
     // 디렉토리 생성
+    // 확장자가 없으면 디렉토리일 가능성이 크다
     public String makeFolders(String path) { //path: service에서 만든 middle path
-        File file = new File(uploadPath, path); //생성자 호출
+        File file = new File(uploadPath, path); //생성자 호출 >> 1개(full 경로) & 2개(경로를 합쳐준다.)
 
         // static 아님 >> 객체화하고 주소값.(file.) 으로 호출했기 때문에
         // 리턴타입은 boolean >> if()안에서 호출했기 때문에
@@ -40,7 +41,7 @@ public class MyFileUtils {
         if(!file.exists()) {
             file.mkdirs();
         }
-        return file.getAbsolutePath(); // AbsolutePath: 절대 경로
+        return file.getAbsolutePath(); // AbsolutePath: 절대 경로(uploadPath + path)
 
     }
 

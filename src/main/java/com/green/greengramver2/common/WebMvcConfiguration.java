@@ -11,7 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@Component
 @Configuration //빈등록(DI 주소값 받기 위해) >> WebMvcConfiguration 객체화
 public class WebMvcConfiguration implements WebMvcConfigurer {
-    private final String uploadPath;
+    private final String uploadPath; //private 에 값을 넣어주기 위해서는 생성자랑 명시적 방법만 가능 (setter x)
+    //setter은 객체화 이후에 사용할 수 있음 (final이 붙으면 setter 이용 x)
 
     public WebMvcConfiguration(@Value("${file.directory}") String uploadPath) {
         this.uploadPath = uploadPath;

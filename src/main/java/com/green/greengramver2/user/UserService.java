@@ -29,9 +29,11 @@ public class UserService {
         p.setUpw(hashedPassword);
         p.setPic(savedPicName);
 
+        //-------------------------------------
         if(p.getNickName() == null || p.getNickName() == ""){
             p.setNickName(CommonUtils.randomNickNm());
         }
+        //-------------------------------------
 
         int result = mapper.insUser(p);
 
