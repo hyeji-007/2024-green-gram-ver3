@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserFollowMapper {
-    int insFollow(UserFollowReq p);
+    int insUserFollow(UserFollowReq p);
+    int delUserFollow(UserFollowReq p);
 }
