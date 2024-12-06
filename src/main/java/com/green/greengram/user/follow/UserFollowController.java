@@ -21,7 +21,7 @@ public class UserFollowController {
         log.info("UserFollowController > postUserFollow > p: {}", p);
         int result = service.postUserFollow(p);
         return ResultResponse.<Integer>builder()
-                .resultMessage("팔로우 완료")
+                .resultMessage("팔로우 신청 완료")
                 .resultData(result)
                 .build();
     }
@@ -39,15 +39,4 @@ public class UserFollowController {
                 .build();
     }
 
-    /*
-    @DeleteMapping
-    public ResultResponse<Integer> delFeedComment(@ParameterObject @ModelAttribute FeedCommentDelReq p) {
-        log.info("FeedCommentController > delFeedComment > p: {}", p);
-        int res = service.delFeedComment(p);
-        return ResultResponse.<Integer>builder()
-                .resultMessage("댓글 삭제가 완료되었습니다.")
-                .resultData(res)
-                .build();
-    }
-     */
 }

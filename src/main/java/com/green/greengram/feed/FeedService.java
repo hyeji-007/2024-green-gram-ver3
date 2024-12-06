@@ -52,7 +52,7 @@ public class FeedService {
         FeedPicDto feedPicDto = new FeedPicDto();
         feedPicDto.setFeedId(feedId);
         feedPicDto.setPics(picNameList);
-        int resultPics = feedPicsMapper.insFeedPics(feedPicDto);
+        int resultPics = feedPicsMapper.insFeedPic(feedPicDto);
 
         return FeedPostRes.builder()
                 .feedId(feedId)
@@ -69,7 +69,7 @@ public class FeedService {
          */
         for(FeedGetRes item : list) {
             //피드 당 사진 리스트
-            item.setPics(feedPicsMapper.selFeedPics(item.getFeedId()));
+            item.setPics(feedPicsMapper.selFeedPic(item.getFeedId()));
 
             //피드 당 댓글 4개
             FeedCommentGetReq commentGetReq = new FeedCommentGetReq(item.getFeedId(), 0, 3);

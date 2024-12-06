@@ -1,6 +1,5 @@
 package com.green.greengram.user;
 
-import com.green.greengram.common.CommonUtils;
 import com.green.greengram.common.MyFileUtils;
 import com.green.greengram.user.model.UserSignInReq;
 import com.green.greengram.user.model.UserSignInRes;
@@ -29,11 +28,6 @@ public class UserService {
         p.setUpw(hashedPassword);
         p.setPic(savedPicName);
 
-        //-------------------------------------
-        if(p.getNickName() == null || p.getNickName() == ""){
-            p.setNickName(CommonUtils.randomNickNm());
-        }
-        //-------------------------------------
 
         int result = mapper.insUser(p);
 

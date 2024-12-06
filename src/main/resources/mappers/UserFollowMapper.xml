@@ -4,13 +4,14 @@
 <mapper namespace="com.green.greengram.user.follow.UserFollowMapper">
     <insert id="insUserFollow" >
         INSERT INTO user_follow
-        SET from_user_id = #{fromUserId}
-          , to_user_id = #{toUserId}
+           SET from_user_id = #{fromUserId}
+             , to_user_id = #{toUserId}
     </insert>
 
     <delete id="delUserFollow">
         DELETE FROM user_follow
-        WHERE from_user_id = #{fromUserId}
-        AND to_user_id = #{toUserId}
+         WHERE from_user_id = #{fromUserId}
+           AND to_user_id = #{toUserId}
     </delete>
+
 </mapper>
