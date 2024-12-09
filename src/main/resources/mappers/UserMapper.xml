@@ -66,4 +66,11 @@
         ON D.feed_id = E.feed_id -- 프로필 사용자의 피드의 좋아요 정보
         WHERE A.user_id = #{profileUserId};
     </select>
+
+    <update id="updUserPic">
+        UPDATE user
+           SET pic = #{picName}
+         WHERE user_id = #{signedUserId}
+    </update>
+
 </mapper>

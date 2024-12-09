@@ -16,7 +16,10 @@ import java.util.UUID;
 public class MyFileUtils {
     private final String uploadPath;
 
-    /*
+    public String getUploadPath() {
+        return uploadPath;
+    }
+/*
     @Value("${file.directory}")은
     yaml 파일에 있는 file.directory 속성에 저장된 값을 생성자 호출할 때 값을 넣어준다.
      */
@@ -73,6 +76,26 @@ public class MyFileUtils {
         File file = new File(uploadPath, path); //파일 객체 생성: 두 값을 결합하여 전체 경로를 만들기
         mf.transferTo(file); //MultipartFile의 데이터를 지정된 file 위치로 복사
         // 클라이언트가 업로드한 파일을 서버 파일 시스템에 저장하는 작업을 수행합
+    }
+
+    //폴더 삭제, e.g. "user/1"
+    public void deleteFolder(String path, boolean deleteRootFolder) {
+        File folder = new File(path);
+        if(folder.exists() && folder.isDirectory()) { //폴더가 존재하면서 디렉토리인가?
+            File[] includedFiles = folder.listFiles();
+
+            for (File f : includedFiles) {
+                if(f.isDirectory()) {
+                    deleteFolder(f.getAbsolutePath(), true);
+                } else {
+                    f.delete();
+                }
+            }
+
+            if(deleteRootFolder) {
+                folder.delete();
+            }
+        }
     }
 }
 
