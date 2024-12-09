@@ -11,4 +11,11 @@
 
     </insert>
 
+    <delete id="delFeedLike">
+        DELETE FROM feed_like
+        WHERE feed_id = #{feedId}
+        AND user_id = #{userId}
+    </delete>
+
+
 </mapper>
