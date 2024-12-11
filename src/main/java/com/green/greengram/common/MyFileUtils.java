@@ -86,14 +86,14 @@ public class MyFileUtils {
 
             for (File f : includedFiles) {
                 if(f.isDirectory()) {
-                    deleteFolder(f.getAbsolutePath(), true);
+                    deleteFolder(f.getAbsolutePath(), true); //재귀적으로 하위 디렉토리까지 포함하여 삭제
                 } else {
-                    f.delete();
+                    f.delete(); //항목이 파일인 경우에는 해당 파일을 삭제함
                 }
             }
 
-            if(deleteRootFolder) {
-                folder.delete();
+            if(deleteRootFolder) { //재귀적으로 하위 디렉토리 및 파일을 모두 삭제한 후 "현재 디렉토리"를 삭제할지 결정
+                folder.delete(); //현재 디렉토리도 삭제
             }
         }
     }

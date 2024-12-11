@@ -149,7 +149,7 @@ public class FeedService {
             long feedId = item.getFeedId();
             if(!commentHashMap.containsKey(feedId)) {
                 FeedCommentGetRes feedCommentGetRes = new FeedCommentGetRes();
-                feedCommentGetRes.setCommentList(new ArrayList<>());
+                feedCommentGetRes.setCommentList(new ArrayList<>(4));
                 commentHashMap.put(feedId, feedCommentGetRes);
             }
             FeedCommentGetRes feedCommentGetRes = commentHashMap.get(feedId);
